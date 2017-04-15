@@ -16,5 +16,7 @@ class Gem::Specification
 end
 
 # start up the CLI
+require "bundler/setup"
 require "digicert/cli"
+
 Digicert::CLI.start(*ARGV)

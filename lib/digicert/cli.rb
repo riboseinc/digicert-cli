@@ -1,7 +1,10 @@
-require "digicert/cli/version"
+require "digicert"
+require "digicert/cli/auth"
 
 module Digicert
   module CLI
-    # Your code goes here...
+    def self.start(*arguments)
+      puts arguments.inspect
+    end
   end
 end
