@@ -1,0 +1,11 @@
+dependencies:
+  override:
+    - gem install bundler -v "~> 1.14"
+
+database:
+  override:
+    - bin/setup
+
+test:
+  override:
+    - COVERAGE=true bin/rspec

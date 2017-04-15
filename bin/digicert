@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+
+# resolve bin path, ignoring symlinks
+require "pathname"
+bin_file = Pathname.new(__FILE__).realpath
+
+# add self to libpath
+$:.unshift File.expand_path("../../lib", bin_file)
+
+# Fixes https://github.com/rubygems/rubygems/issues/1420
+require "rubygems/specification"
+
+class Gem::Specification
+  def this; self; end
+end
+
+# start up the CLI
+require "digicert/cli"
+Digicert::CLI.start(*ARGV)

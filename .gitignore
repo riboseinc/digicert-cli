@@ -1,0 +1,15 @@
+source_credentials.sh
+.DS_Store
+/.bundle/
+/.yardoc
+/.pryrc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+# rspec failure tracking
+.rspec_status
