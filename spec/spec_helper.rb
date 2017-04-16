@@ -1,3 +1,4 @@
+require "webmock/rspec"
 require "bundler/setup"
 require "digicert/cli"
 
@@ -7,5 +8,9 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.before(:all) do
+    Digicert::CLI::Command.register_available_commands
   end
 end
