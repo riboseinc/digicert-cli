@@ -4,6 +4,24 @@
 
 The CLI for the Digicert API
 
+## Usages
+
+### Order
+
+This CLI provides an easier interface to list the orders from the Digicert API.
+To retrieve the list of the certificate orders please we can use
+
+```sh
+bin/digicert order:list
+```
+
+In case you have a specific `order_id` and you want to retrieve the details for
+that orders, then please use the list interface with `-o` option.
+
+```sh
+bin/digicert order:list -o 123_456_789
+```
+
 ## Development
 
 We are following Sandi Metz's Rules for this gem, you can read the
