@@ -22,6 +22,16 @@ that orders, then please use the list interface with `-o` option.
 bin/digicert order:list -o 123_456_789
 ```
 
+Digicert does not have any a direct interface to filter certificate orders,
+but we have added the following interface to partially support order filtering.
+It usages the `list` interface to retrieve all of the orders and that apply
+filters on top of those results. Currently supported options are `common_name`
+and `product_type`.
+
+```sh
+bin/digicert order:find -c "ribosetest.com" -p "ssl_plus"
+```
+
 ## Development
 
 We are following Sandi Metz's Rules for this gem, you can read the
