@@ -24,6 +24,7 @@ module Digicert
       end
 
       def self.register_available_commands
+        commands["find-order"] = { klass: "OrderFinder", method: :find }
         commands["find-orders"] = { klass: "OrderFinder", method: :list }
       end
 

@@ -9,3 +9,6 @@ database:
 test:
   override:
     - COVERAGE=true bin/rspec
+
+  pre:
+    - cp .sample.env .env

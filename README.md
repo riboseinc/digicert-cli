@@ -6,7 +6,7 @@ The CLI for the Digicert API
 
 ## Usages
 
-### Order
+### Orders
 
 This CLI provides an easier interface to list the orders from the Digicert API.
 To retrieve the list of the certificate orders we can use
@@ -22,6 +22,22 @@ Currently supported options are `common_name` and `product_type`.
 
 ```sh
 digicert find-orders -c "ribosetest.com" -p "ssl_plus"
+```
+
+### Single Order
+
+Use `find-order` interface to retrieve a single order, this interface supports
+all default filters.
+
+```sh
+digicert find-order -c "ribosetest.com" -p "ssl_plus" --status expired
+```
+
+This interface also allow us to specific a flag in case we only want to find
+the `id` for the resource.
+
+```sh
+digicert find-order -c "ribosetest.com" -p "ssl_plus" --status expired --quiet
 ```
 
 ## Development

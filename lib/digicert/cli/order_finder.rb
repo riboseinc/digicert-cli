@@ -1,3 +1,5 @@
+require "digicert/cli/order_filterer"
+
 module Digicert
   module CLI
     class OrderFinder
@@ -8,32 +10,31 @@ module Digicert
       end
 
       def list
-        orders = order_api.all
-        orders = apply_filters(orders)
+        filtered_orders = apply_filters(orders)
+        display_orders_in_table(filtered_orders)
+      end
 
-        display_orders_in_table(orders)
+      def find
+        filtered_orders = apply_filters(orders)
+        apply_ouput_flag(filtered_orders.first)
       end
 
       private
+
+      def orders
+        @orders ||= order_api.all
+      end
 
       def order_api
         Digicert::Order
       end
 
       def apply_filters(orders)
-        orders.select do |order|
-          filter_by_common_name(order) && filter_by_product_type(order)
-        end
+        Digicert::CLI::OrderFilterer.filter(orders, options)
       end
 
-      def filter_by_common_name(order)
-        !options[:common_name] ||
-          options[:common_name] == order.certificate.common_name
-      end
-
-      def filter_by_product_type(order)
-        !options[:product_type] ||
-          options[:product_type] == order.product_name_id
+      def apply_ouput_flag(order)
+        options[:quiet] ? order.id : order
       end
 
       def display_orders_in_table(orders)
