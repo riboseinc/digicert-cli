@@ -1,6 +1,7 @@
 require "optparse"
 require "digicert"
 
+require "digicert/cli/util"
 require "digicert/cli/auth"
 require "digicert/cli/command"
 
@@ -10,9 +11,10 @@ module Digicert
       command = args.shift.strip rescue "help"
 
       Digicert::CLI::Command.load
-      response = Digicert::CLI::Command.run(command, args)
+      response_body = Digicert::CLI::Command.run(command, args)
 
-      $stdout.write(response)
+      $stdout.write(response_body)
+      $stdout.write("\n")
     end
   end
 end
