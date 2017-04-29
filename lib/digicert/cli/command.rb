@@ -1,5 +1,6 @@
 require "optparse"
 require "digicert/cli/command/order"
+require "digicert/cli/command/certificate"
 
 module Digicert
   module CLI
@@ -25,6 +26,7 @@ module Digicert
 
       def self.register_available_commands
         commands[:order] = { klass: Digicert::CLI::Command::Order }
+        commands[:certificate] = { klass: Digicert::CLI::Command::Certificate }
       end
 
       def self.extract_command(command)
