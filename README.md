@@ -9,27 +9,19 @@ The CLI for the Digicert API
 ### Order
 
 This CLI provides an easier interface to list the orders from the Digicert API.
-To retrieve the list of the certificate orders please we can use
+To retrieve the list of the certificate orders we can use
 
 ```sh
-bin/digicert order:list
-```
-
-In case you have a specific `order_id` and you want to retrieve the details for
-that orders, then please use the list interface with `-o` option.
-
-```sh
-bin/digicert order:list -o 123_456_789
+digicert find-orders
 ```
 
 Digicert does not have any a direct interface to filter certificate orders,
-but we have added the following interface to partially support order filtering.
-It usages the `list` interface to retrieve all of the orders and that apply
-filters on top of those results. Currently supported options are `common_name`
-and `product_type`.
+but we have added partial support for filtering, to filter the orders by any
+specific criteria please pass those as option to the `find-orders` interface.
+Currently supported options are `common_name` and `product_type`.
 
 ```sh
-bin/digicert order:find -c "ribosetest.com" -p "ssl_plus"
+digicert find-orders -c "ribosetest.com" -p "ssl_plus"
 ```
 
 ## Development
