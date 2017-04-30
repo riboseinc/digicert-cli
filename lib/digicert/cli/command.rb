@@ -58,6 +58,8 @@ module Digicert
       def self.global_options
         [
           ["-o", "--order_id ORDER_ID",  "The Digicert Order Id"],
+          ["-q", "--quiet",  "Flag to return resource Id only"],
+          ["-s", "--status STATUS", "Use to specify the order status"],
           ["-c", "--common_name COMMON_NAME", "The common name for the order"],
           ["-p", "--product_type NAME_ID", "The Digicert product name Id"],
         ]

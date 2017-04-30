@@ -1,6 +1,7 @@
 require "webmock/rspec"
 require "bundler/setup"
 require "digicert/cli"
+require "digicert/rspec"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
