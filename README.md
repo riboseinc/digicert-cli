@@ -40,6 +40,14 @@ the `id` for the resource.
 digicert find-order -c "ribosetest.com" -p "ssl_plus" --status expired --quiet
 ```
 
+### Reissue an order
+
+To reissue an existing order, we can use the following interface.
+
+```sh
+digicert reissue-order --order_id 12345
+```
+
 ## Development
 
 We are following Sandi Metz's Rules for this gem, you can read the

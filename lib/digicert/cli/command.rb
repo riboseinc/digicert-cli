@@ -1,5 +1,6 @@
 require "optparse"
 require "digicert/cli/order_finder"
+require "digicert/cli/order_reissuer"
 
 module Digicert
   module CLI
@@ -26,6 +27,7 @@ module Digicert
       def self.register_available_commands
         commands["find-order"] = { klass: "OrderFinder", method: :find }
         commands["find-orders"] = { klass: "OrderFinder", method: :list }
+        commands["reissue-order"] = { klass: "OrderReissuer", method: :create }
       end
 
       def self.extract_command(command)
