@@ -27,7 +27,7 @@ RSpec.describe "Order" do
 
   describe "reissuing an order" do
     it "reissues the order and print out the details" do
-      command = %w(order reissue --order_id 123456)
+      command = %w(order reissue --order_id 123456 -f --output /tmp/downloads)
       allow(Digicert::OrderReissuer).to receive(:create)
 
       Digicert::CLI.start(*command)

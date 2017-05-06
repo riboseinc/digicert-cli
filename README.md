@@ -49,6 +49,15 @@ To reissue an existing order, we can use the following interface.
 digicert order reissue --order_id 12345
 ```
 
+### Reissue and download a certificate
+
+To reissue an order and save that reissued certificate to a specific path we can
+use the following interface.
+
+```sh
+digicert order reissue --order_id 123456 --output /full/download/path
+```
+
 ## Development
 
 We are following Sandi Metz's Rules for this gem, you can read the

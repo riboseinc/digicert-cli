@@ -44,9 +44,7 @@ module Digicert
       end
 
       def print_message(message)
-        if options.fetch(:print_enable, true)
-          puts(message)
-        end
+        Digicert::CLI::Util.print_message(message)
       end
     end
   end

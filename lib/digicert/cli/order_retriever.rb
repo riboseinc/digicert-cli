@@ -5,8 +5,8 @@ module Digicert
     class OrderRetriever
       def initialize(order_id, attributes)
         @order_id = order_id
-        @wait_time = attributes.fetch(:wait_time, 10)
-        @number_of_times = attributes.fetch(:number_of_times, 5)
+        @wait_time = attributes[:wait_time] || 10
+        @number_of_times = attributes[:number_of_times] || 5
       end
 
       def fetch
