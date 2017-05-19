@@ -8,12 +8,12 @@ require "digicert/cli/command"
 module Digicert
   module CLI
     def self.start(*args)
-      command = args.shift.strip rescue "help"
+      command = args.shift.strip rescue help
+      subcommand = args.first.start_with?("-") ? "list" : args.shift.strip
 
-      Digicert::CLI::Command.load
-      response_body = Digicert::CLI::Command.run(command, args)
+      response = Digicert::CLI::Command.run(command, subcommand, args)
 
-      $stdout.write(response_body)
+      $stdout.write(response)
       $stdout.write("\n")
     end
   end

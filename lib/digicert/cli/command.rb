@@ -1,42 +1,28 @@
 require "optparse"
-require "digicert/cli/order_finder"
-require "digicert/cli/order_reissuer"
+require "digicert/cli/order"
 
 module Digicert
   module CLI
     module Command
-      def self.load
-        register_available_commands
-      end
-
-      def self.run(command, args = {})
-        command_klass, method = extract_command(command)
+      def self.run(command, subcommand, args = {})
+        command_klass = command_handler(command)
         attributes = parse_option_arguments(args)
 
-        command_klass.new(attributes).send(method || :list)
+        command_klass.new(attributes).send(subcommand.to_sym)
       end
 
       def self.parse(command)
-        commands[command.to_s] || raise(ArgumentError)
+        command_handlers[command.to_sym] || raise(ArgumentError)
       end
 
-      def self.commands
-        @@commands ||= {}
+      def self.command_handlers
+        @commands ||= { order: "Order" }
       end
 
-      def self.register_available_commands
-        commands["find-order"] = { klass: "OrderFinder", method: :find }
-        commands["find-orders"] = { klass: "OrderFinder", method: :list }
-        commands["reissue-order"] = { klass: "OrderReissuer", method: :create }
-      end
-
-      def self.extract_command(command)
-        parsed_command = parse(command)
-        command_klass = Object.const_get(
-          ["Digicert::CLI", parsed_command[:klass]].join("::"),
+      def self.command_handler(command)
+        Object.const_get(
+          ["Digicert", "CLI", parse(command)].join("::")
         )
-
-        [command_klass, parsed_command[:method]]
       end
 
       def self.parse_option_arguments(args)

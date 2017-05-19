@@ -1,12 +1,14 @@
 require "digicert/cli/order_filterer"
+require "digicert/cli/order_reissuer"
 
 module Digicert
   module CLI
-    class OrderFinder
-      attr_reader :options
+    class Order
+      attr_reader :order_id, :options
 
       def initialize(attributes = {})
         @options = attributes
+        @order_id = options.delete(:order_id)
       end
 
       def list
@@ -17,6 +19,12 @@ module Digicert
       def find
         filtered_orders = apply_filters(orders)
         apply_ouput_flag(filtered_orders.first)
+      end
+
+      def reissue
+        Digicert::CLI::OrderReissuer.new(
+          order_id: order_id, **options
+        ).create
       end
 
       private

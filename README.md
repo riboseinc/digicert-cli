@@ -13,32 +13,32 @@ This CLI provides an easier interface to list the orders from the Digicert API.
 To retrieve the list of the certificate orders we can use
 
 ```sh
-digicert find-orders
+digicert order list
 ```
 
 Digicert does not have any a direct interface to filter certificate orders,
 but we have added partial support for filtering, to filter the orders by any
-specific criteria please pass those as option to the `find-orders` interface.
+specific criteria please pass those as option to the `order list` interface.
 Currently supported options are `common_name` and `product_type`.
 
 ```sh
-digicert find-orders -c "ribosetest.com" -p "ssl_plus"
+digicert order list -c "ribosetest.com" -p "ssl_plus"
 ```
 
 ### Single Order
 
-Use `find-order` interface to retrieve a single order, this interface supports
-all default filters.
+Use `find` interface to retrieve a single order, this interface supports all
+default filters.
 
 ```sh
-digicert find-order -c "ribosetest.com" -p "ssl_plus" --status expired
+digicert order find -c "ribosetest.com" -p "ssl_plus" --status expired
 ```
 
 This interface also allow us to specific a flag in case we only want to find
 the `id` for the resource.
 
 ```sh
-digicert find-order -c "ribosetest.com" -p "ssl_plus" --status expired --quiet
+digicert order find -c "ribosetest.com" -p "ssl_plus" --status expired --quiet
 ```
 
 ### Reissue an order
@@ -46,7 +46,7 @@ digicert find-order -c "ribosetest.com" -p "ssl_plus" --status expired --quiet
 To reissue an existing order, we can use the following interface.
 
 ```sh
-digicert reissue-order --order_id 12345
+digicert order reissue --order_id 12345
 ```
 
 ## Development
