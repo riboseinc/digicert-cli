@@ -1,6 +1,7 @@
 # Digicert CLI
 
-[![CircleCI](https://circleci.com/gh/abunashir/digicert-cli.svg?style=svg&circle-token=479409dc95a0866bfeefd87a285202d7e883b51c)](https://circleci.com/gh/abunashir/digicert-cli)
+[![Build
+Status](https://travis-ci.org/riboseinc/digicert-cli.svg?branch=master)](https://travis-ci.org/riboseinc/digicert-cli)
 
 The CLI for the Digicert API
 

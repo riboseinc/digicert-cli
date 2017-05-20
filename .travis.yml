@@ -1,0 +1,8 @@
+sudo: false
+language: ruby
+rvm:
+  - 2.4.1
+
+before_install:
+  - cp .sample.env .env
+  - gem install bundler -v 1.14.6
