@@ -11,6 +11,10 @@ module Digicert
           table.rows = rows
         end
       end
+
+      def self.print_message(message)
+        puts(message)
+      end
     end
   end
 end
