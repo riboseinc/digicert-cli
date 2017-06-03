@@ -58,6 +58,17 @@ use the following interface.
 digicert order reissue --order_id 123456 --output /full/download/path
 ```
 
+### CSR
+
+#### Fetch an order's CSR
+
+If we need to retrieve the `CSR` for any specific order then we can use and it
+will return the content in the terminal.
+
+```sh
+digicert csr fetch --order_id 123456
+```
+
 ## Development
 
 We are following Sandi Metz's Rules for this gem, you can read the
