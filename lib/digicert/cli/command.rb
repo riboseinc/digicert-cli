@@ -52,6 +52,7 @@ module Digicert
           ["-c", "--common_name COMMON_NAME", "The common name for the order"],
           ["-p", "--product_type NAME_ID", "The Digicert product name Id"],
           ["-f", "--fetch", "Flag to fetch resource after certian operation"],
+          ["-crt", "--crt CSR_FILE", "Full path for the csr file"],
           ["-path", "--output DOWNLOAD_PATH", "Path to download the certificate"]
         ]
       end

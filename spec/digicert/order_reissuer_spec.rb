@@ -7,12 +7,27 @@ RSpec.describe Digicert::CLI::OrderReissuer do
         order_id = 123_456
         allow(Digicert::OrderReissuer).to receive(:create)
 
-        reissuer = Digicert::CLI::OrderReissuer.new(order_id: order_id)
-        reissuer.create
+        Digicert::CLI::OrderReissuer.new(order_id: order_id).create
 
         expect(
           Digicert::OrderReissuer
         ).to have_received(:create).with(order_id: order_id)
+      end
+    end
+
+    context "with order id and new csr" do
+      it "sends create message to reissuer with new details" do
+        order_id = 123_456
+        csr_file = "./spec/fixtures/rsa4096.csr"
+        allow(Digicert::OrderReissuer).to receive(:create)
+
+        Digicert::CLI::OrderReissuer.new(
+          order_id: order_id, crt: csr_file
+        ).create
+
+        expect(Digicert::OrderReissuer).to have_received(:create).with(
+          order_id: order_id, certificate: { csr: File.read(csr_file) }
+        )
       end
     end
 

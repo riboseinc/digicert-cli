@@ -46,7 +46,7 @@ digicert order find -c "ribosetest.com" -p "ssl_plus" --status expired --quiet
 To reissue an existing order, we can use the following interface.
 
 ```sh
-digicert order reissue --order_id 12345
+digicert order reissue --order_id 12345 --crt full_path_to.csr
 ```
 
 ### Reissue and download a certificate
