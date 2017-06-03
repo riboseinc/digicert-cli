@@ -69,6 +69,14 @@ will return the content in the terminal.
 digicert csr fetch --order_id 123456
 ```
 
+#### Generate a new CSR
+
+To generate a new `CSR` using an existing order details we can use
+
+```sh
+digicert csr generate -o 12345 --key full_path_to_the.key
+```
+
 ## Development
 
 We are following Sandi Metz's Rules for this gem, you can read the

@@ -12,4 +12,17 @@ RSpec.describe Digicert::CLI::CSR do
       expect(csr).to eq("------ [CSR HERE] ------")
     end
   end
+
+  describe "#generate" do
+    it "generates a new csr for an existing order" do
+      order_id = 123456
+      key_file = "./spec/fixtures/rsa4096.key"
+      stub_digicert_order_fetch_api(order_id)
+
+      csr = Digicert::CLI::CSR.new(order_id: order_id, key: key_file).generate
+
+      expect(csr.start_with?("-----BEGIN CERTIFICATE REQUEST")).to be_truthy
+      expect(csr.end_with?("--END CERTIFICATE REQUEST-----\n")).to be_truthy
+    end
+  end
 end

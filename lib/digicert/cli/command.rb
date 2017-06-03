@@ -54,6 +54,7 @@ module Digicert
           ["-p", "--product_type NAME_ID", "The Digicert product name Id"],
           ["-f", "--fetch", "Flag to fetch resource after certian operation"],
           ["-crt", "--crt CSR_FILE", "Full path for the csr file"],
+          ["-k", "--key KEY_FILE_PATH", "Path to the rsa key file"],
           ["-path", "--output DOWNLOAD_PATH", "Path to download the certificate"]
         ]
       end
