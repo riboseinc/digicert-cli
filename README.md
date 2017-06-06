@@ -77,6 +77,13 @@ To generate a new `CSR` using an existing order details we can use
 digicert csr generate -o 12345 --key full_path_to_the.key
 ```
 
+Generate `CSR` with `--common_name` and `san`
+
+```sh
+digicert csr generate --common_name ribosetest.com --order_id 1234 \
+  --san test1.ribosetest.com,test2.ribosetest.com, --key path_to_key_file
+```
+
 ## Development
 
 We are following Sandi Metz's Rules for this gem, you can read the

@@ -1,4 +1,5 @@
 require "optparse"
+require "openssl"
 require "digicert"
 
 require "digicert/cli/util"
