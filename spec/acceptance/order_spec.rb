@@ -16,7 +16,7 @@ RSpec.describe "Order" do
 
   describe "finding an order" do
     it "finds a specific order based on the filters params" do
-      command = %w(order find -c ribosetest.com -p -s expired)
+      command = %w(order find -c ribosetest.com -s expired)
       allow(Digicert::CLI::Order).to receive_message_chain(:new, :find)
 
       Digicert::CLI.start(*command)

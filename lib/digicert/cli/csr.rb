@@ -1,11 +1,6 @@
 module Digicert
   module CLI
-    class CSR
-      def initialize(order_id:, **options)
-        @order_id = order_id
-        @rsa_key = options.fetch(:key, nil)
-      end
-
+    class CSR < Digicert::CLI::Base
       def fetch
         if order
           order.certificate.csr
@@ -18,9 +13,20 @@ module Digicert
         end
       end
 
+      def self.local_options
+        [
+          ["-k", "--key KEY_FILE_PATH", "Path to the rsa key file"],
+          ["-r", "--crt CSR_FILE", "Full path for the csr file"]
+        ]
+      end
+
       private
 
-      attr_reader :order_id, :rsa_key
+      attr_reader :rsa_key
+
+      def extract_local_attributes(options)
+        @rsa_key = options.fetch(:key, nil)
+      end
 
       def order
         @order ||= Digicert::Order.fetch(order_id)

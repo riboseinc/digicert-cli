@@ -4,16 +4,7 @@ require "digicert/cli/certificate_downloader"
 
 module Digicert
   module CLI
-    class OrderReissuer
-      attr_reader :order_id, :csr_file, :options, :output_path
-
-      def initialize(order_id:, **options)
-        @order_id = order_id
-        @options = options
-        @csr_file = options.fetch(:crt, nil)
-        @output_path = options.fetch(:output, "/tmp")
-      end
-
+    class OrderReissuer < Digicert::CLI::Base
       def create
         apply_output_options(reissue_an_order)
       end
@@ -23,6 +14,13 @@ module Digicert
       end
 
       private
+
+      attr_reader :csr_file, :output_path
+
+      def extract_local_attributes(options)
+        @csr_file = options.fetch(:crt, nil)
+        @output_path = options.fetch(:output, "/tmp")
+      end
 
       def reissue_an_order
         Digicert::OrderReissuer.create(order_params)

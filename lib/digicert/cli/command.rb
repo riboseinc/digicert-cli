@@ -7,7 +7,7 @@ module Digicert
     module Command
       def self.run(command, subcommand, args = {})
         command_klass = command_handler(command)
-        attributes = parse_option_arguments(args)
+        attributes = parse_option_arguments(command_klass, args)
 
         command_klass.new(attributes).send(subcommand.to_sym)
       end
@@ -26,13 +26,14 @@ module Digicert
         )
       end
 
-      def self.parse_option_arguments(args)
+      def self.parse_option_arguments(handler_klass, args)
         attributes = {}
 
         option_parser = OptionParser.new do |parser|
-          parser.banner = "Usage: digicert resource:action [options]"
+          parser.banner = "Usage: digicert resource action [options]"
+          options = global_options + handler_klass.local_options
 
-          global_options.each do |option|
+          options.each do |option|
             attribute_name = option[1].split.first.gsub("--", "").to_sym
             parser.on(*option) { |value| attributes[attribute_name] = value}
           end
@@ -47,15 +48,8 @@ module Digicert
 
       def self.global_options
         [
+          ["-c", "--common_name COMMON_NAME", "The domain name"],
           ["-o", "--order_id ORDER_ID",  "The Digicert Order Id"],
-          ["-q", "--quiet",  "Flag to return resource Id only"],
-          ["-s", "--status STATUS", "Use to specify the order status"],
-          ["-c", "--common_name COMMON_NAME", "The common name for the order"],
-          ["-p", "--product_type NAME_ID", "The Digicert product name Id"],
-          ["-f", "--fetch", "Flag to fetch resource after certian operation"],
-          ["-crt", "--crt CSR_FILE", "Full path for the csr file"],
-          ["-k", "--key KEY_FILE_PATH", "Path to the rsa key file"],
-          ["-path", "--output DOWNLOAD_PATH", "Path to download the certificate"]
         ]
       end
     end

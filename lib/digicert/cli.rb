@@ -3,6 +3,7 @@ require "digicert"
 
 require "digicert/cli/util"
 require "digicert/cli/auth"
+require "digicert/cli/base"
 require "digicert/cli/command"
 
 module Digicert
