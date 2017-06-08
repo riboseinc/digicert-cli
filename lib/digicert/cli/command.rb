@@ -1,6 +1,7 @@
 require "optparse"
-require "digicert/cli/order"
 require "digicert/cli/csr"
+require "digicert/cli/order"
+require "digicert/cli/certificate"
 
 module Digicert
   module CLI
@@ -17,7 +18,7 @@ module Digicert
       end
 
       def self.command_handlers
-        @commands ||= { order: "Order", csr: "CSR"}
+        @commands ||= { order: "Order", csr: "CSR", certificate: "Certificate" }
       end
 
       def self.command_handler(command)

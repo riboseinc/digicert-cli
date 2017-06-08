@@ -58,6 +58,17 @@ use the following interface.
 digicert order reissue --order_id 123456 --output /full/download/path
 ```
 
+### Certificate
+
+#### Fetch a certificate
+
+To fetch a certificate using the `order_id`, we can use the following interface,
+this interface also supports `--quite` option to fetch only the certificate id.
+
+```sh
+digicert certificate fetch --order_id 123456789 --quite
+```
+
 ### CSR
 
 #### Fetch an order's CSR
