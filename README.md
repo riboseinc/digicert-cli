@@ -69,6 +69,15 @@ this interface also supports `--quite` option to fetch only the certificate id.
 digicert certificate fetch --order_id 123456789 --quite
 ```
 
+#### Download a certificate
+
+To download a certificate we can use the following interface, this will download
+the certificates to the provided paths.
+
+```sh
+digicert certificate fetch --order_id 123456 --output full_path_to_download
+```
+
 ### CSR
 
 #### Fetch an order's CSR

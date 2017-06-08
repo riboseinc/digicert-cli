@@ -29,5 +29,23 @@ RSpec.describe Digicert::CLI::Certificate do
         expect(certificate).to eq(order_id)
       end
     end
+
+    context "output attribute specified" do
+      it "sends download message to certificate downloader" do
+        order_id = 112_358
+
+        stub_digicert_order_fetch_api(order_id)
+        allow(Digicert::CLI::CertificateDownloader).to receive(:download)
+
+        Digicert::CLI::Certificate.new(
+          order_id: order_id, output: "/tmp/downloads"
+        ).fetch
+
+        expect(Digicert::CLI::CertificateDownloader).
+          to have_received(:download).with({
+          certificate_id: 112358, filename: order_id, path: "/tmp/downloads"
+        })
+      end
+    end
   end
 end
