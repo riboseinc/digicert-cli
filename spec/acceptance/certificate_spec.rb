@@ -26,4 +26,20 @@ RSpec.describe "Certificate" do
       )
     end
   end
+
+  describe "listing duplicate certificates" do
+    it "returns the list of duplicate certificates" do
+      command = %w(certificate duplicates --order_id 123456)
+
+      allow(
+        Digicert::CLI::Certificate,
+      ).to receive_message_chain(:new, :duplicates)
+
+      Digicert::CLI.start(*command)
+
+      expect(
+        Digicert::CLI::Certificate,
+      ).to have_received(:new).with(order_id: "123456")
+    end
+  end
 end

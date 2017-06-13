@@ -78,6 +78,16 @@ the certificates to the provided paths.
 digicert certificate fetch --order_id 123456 --output full_path_to_download
 ```
 
+#### List duplicate certificates
+
+If we need to list the duplicate certificates for any specific order then we can
+use the following interface, and it will list the duplicate certificates with
+some important attributes.
+
+```ruby
+digicert certificate duplicates --order_id 123456
+```
+
 ### CSR
 
 #### Fetch an order's CSR

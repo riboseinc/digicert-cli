@@ -48,4 +48,17 @@ RSpec.describe Digicert::CLI::Certificate do
       end
     end
   end
+
+  describe "#duplicates" do
+    it "lists duplicate certificates" do
+      order_id = 112_358
+      allow(Digicert::DuplicateCertificate).to receive(:all)
+
+      Digicert::CLI::Certificate.new(order_id: order_id).duplicates
+
+      expect(
+        Digicert::DuplicateCertificate,
+      ).to have_received(:all).with(order_id: order_id)
+    end
+  end
 end
