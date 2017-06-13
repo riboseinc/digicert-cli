@@ -78,6 +78,15 @@ the certificates to the provided paths.
 digicert certificate fetch --order_id 123456 --output full_path_to_download
 ```
 
+There is another interface only to download the certificate, this interface
+support both the `--order_id` and `--certificate_id`, so if we need to download
+any certificate by it's id then we can use this one
+
+```ruby
+digicert certificate download --order_id 654321 --output /downloads
+digicert certificate download --certificate_id 123456 --output /downloads
+```
+
 #### List duplicate certificates
 
 If we need to list the duplicate certificates for any specific order then we can

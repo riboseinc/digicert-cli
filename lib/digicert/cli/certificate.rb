@@ -11,9 +11,14 @@ module Digicert
         end
       end
 
+      def download
+        download_certificate(certificate_id)
+      end
+
       def self.local_options
         [
           ["-q", "--quiet",  "Flag to return only the certificate Id"],
+          ["-c", "--certificate_id CERTIFICATE_ID", "The certificate ID"],
           ["-p", "--output DOWNLOAD_PATH", "Path to download the certificate"]
         ]
       end
@@ -30,18 +35,24 @@ module Digicert
         @order ||= Digicert::Order.fetch(order_id)
       end
 
+      def certificate_id
+        @certificate_id ||= options[:certificate_id] || order.certificate.id
+      end
+
       def duplicate_certificates
         @certificates ||= Digicert::DuplicateCertificate.all(order_id: order_id)
       end
 
       def apply_option_flags(certificate)
-        download(certificate) || apply_output_flag(certificate)
+        download_certificate(certificate.id) || apply_output_flag(certificate)
       end
 
-      def download(certificate)
+      def download_certificate(certificate_id)
         if output_path
           Digicert::CLI::CertificateDownloader.download(
-            path: output_path, filename: order_id, certificate_id: certificate.id
+            path: output_path,
+            certificate_id: certificate_id,
+            filename: order_id || certificate_id,
           )
         end
       end

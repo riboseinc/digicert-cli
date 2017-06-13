@@ -42,4 +42,20 @@ RSpec.describe "Certificate" do
       ).to have_received(:new).with(order_id: "123456")
     end
   end
+
+  describe "downloading a certificate" do
+    it "downloads the certificate to output path" do
+      command = %w(certificate download --certificate_id 123 --output /tmp)
+
+      allow(
+        Digicert::CLI::Certificate,
+      ).to receive_message_chain(:new, :download)
+
+      Digicert::CLI.start(*command)
+
+      expect(
+        Digicert::CLI::Certificate,
+      ).to have_received(:new).with(certificate_id: "123", output: "/tmp")
+    end
+  end
 end

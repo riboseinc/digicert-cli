@@ -61,4 +61,44 @@ RSpec.describe Digicert::CLI::Certificate do
       ).to have_received(:all).with(order_id: order_id)
     end
   end
+
+  describe "#download" do
+    context "with certificate_id" do
+      it "sends downloader a download message" do
+        certificate_id = 123_456_789
+        downloader = Digicert::CLI::CertificateDownloader
+        allow(downloader).to receive(:download)
+
+        Digicert::CLI::Certificate.new(
+          certificate_id: certificate_id, output: "/tmp/downloads",
+        ).download
+
+        expect(downloader).to have_received(:download).with(
+          hash_including(
+            certificate_id: certificate_id, filename: certificate_id,
+          ),
+        )
+      end
+    end
+
+    context "with order_id" do
+      it "fetch order and sends downloader a download message" do
+        order_id = 123_456_789
+        downloader = Digicert::CLI::CertificateDownloader
+
+        allow(downloader).to receive(:download)
+        stub_digicert_order_fetch_api(order_id)
+
+        Digicert::CLI::Certificate.new(
+          order_id: order_id, output: "/tmp/downloads",
+        ).download
+
+        expect(downloader).to have_received(:download).with(
+          hash_including(
+            filename: order_id, path: "/tmp/downloads", certificate_id: 112358,
+          ),
+        )
+      end
+    end
+  end
 end
