@@ -36,7 +36,7 @@ RSpec.describe Digicert::CLI::CSR do
         stub_digicert_order_fetch_api(order_id)
 
         csr = Digicert::CLI::CSR.new(
-          order_id: order_id, common_name: common_name, san: san, key: key_file
+          order_id: order_id, common_name: common_name, san: san, key: key_file,
         ).generate
 
         expect(csr.start_with?("-----BEGIN CERTIFICATE REQUEST")).to be_truthy

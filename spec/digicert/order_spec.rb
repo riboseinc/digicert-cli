@@ -32,8 +32,8 @@ RSpec.describe Digicert::CLI::Order do
         common_name = "digicert.com"
         stub_digicert_order_list_api
 
-        order_id= Digicert::CLI::Order.new(
-          common_name: common_name, quiet: true
+        order_id = Digicert::CLI::Order.new(
+          common_name: common_name, quiet: true,
         ).find
 
         expect(order_id).to be_a(Integer)

@@ -10,7 +10,7 @@ RSpec.describe Digicert::CLI::OrderReissuer do
         Digicert::CLI::OrderReissuer.new(order_id: order_id).create
 
         expect(
-          Digicert::OrderReissuer
+          Digicert::OrderReissuer,
         ).to have_received(:create).with(order_id: order_id)
       end
     end
@@ -22,11 +22,11 @@ RSpec.describe Digicert::CLI::OrderReissuer do
         allow(Digicert::OrderReissuer).to receive(:create)
 
         Digicert::CLI::OrderReissuer.new(
-          order_id: order_id, crt: csr_file
+          order_id: order_id, crt: csr_file,
         ).create
 
         expect(Digicert::OrderReissuer).to have_received(:create).with(
-          order_id: order_id, certificate: { csr: File.read(csr_file) }
+          order_id: order_id, certificate: { csr: File.read(csr_file) },
         )
       end
     end
@@ -40,7 +40,7 @@ RSpec.describe Digicert::CLI::OrderReissuer do
         allow(Digicert::CLI::CertificateDownloader).to receive(:download)
 
         Digicert::CLI::OrderReissuer.create(
-          order_id: order_id, output: "/tmp", number_of_times: 1, wait_time: 1
+          order_id: order_id, output: "/tmp", number_of_times: 1, wait_time: 1,
         )
 
         expect(Digicert::CLI::CertificateDownloader).
@@ -67,8 +67,8 @@ RSpec.describe Digicert::CLI::OrderReissuer do
         dns_names: order.certificate.dns_names,
         csr: order.certificate.csr,
         signature_hash: order.certificate.signature_hash,
-        server_platform: { id: 45 }
-      }
+        server_platform: { id: 45 },
+      },
     }
   end
 end

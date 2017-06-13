@@ -38,12 +38,12 @@ RSpec.describe Digicert::CLI::Certificate do
         allow(Digicert::CLI::CertificateDownloader).to receive(:download)
 
         Digicert::CLI::Certificate.new(
-          order_id: order_id, output: "/tmp/downloads"
+          order_id: order_id, output: "/tmp/downloads",
         ).fetch
 
         expect(Digicert::CLI::CertificateDownloader).
           to have_received(:download).with({
-          certificate_id: 112358, filename: order_id, path: "/tmp/downloads"
+            certificate_id: 112358, filename: order_id, path: "/tmp/downloads",
         })
       end
     end
