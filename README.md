@@ -2,57 +2,76 @@
 
 [![Build
 Status](https://travis-ci.org/riboseinc/digicert-cli.svg?branch=master)](https://travis-ci.org/riboseinc/digicert-cli)
+[![Code
+Climate](https://codeclimate.com/github/riboseinc/digicert-cli/badges/gpa.svg)](https://codeclimate.com/github/riboseinc/digicert-cli)
+[![Gem
+Version](https://badge.fury.io/rb/digicert-cli.svg)](https://badge.fury.io/rb/digicert-cli)
 
-The CLI for the Digicert API
+The [Digicert CLI] is a tool that allows us to manage Digicert orders,
+certificates and etc using [Digicert Ruby Client].
+
+## Configure
+
+We need to setup our API key before we want to use the CLI. For simplicity it
+usages the environment variables. To configure the key we can use
+
+```sh
+export DIGICERT_API_KEY=YOUR_SECRET_API_KEY
+```
 
 ## Usages
 
 ### Orders
 
-This CLI provides an easier interface to list the orders from the Digicert API.
-To retrieve the list of the certificate orders we can use
+Listing Digicert orders are pretty simple, we can list all of our orders using
 
 ```sh
 digicert order list
 ```
 
-Digicert does not have any a direct interface to filter certificate orders,
-but we have added partial support for filtering, to filter the orders by any
-specific criteria please pass those as option to the `order list` interface.
-Currently supported options are `common_name` and `product_type`.
+This interface also support filtering orders based on some specific attributes,
+for example if we want to list all the order for one specific product type
+`ssl_plus`, then we can do
 
 ```sh
-digicert order list -c "ribosetest.com" -p "ssl_plus"
+digicert order list --product_type "ssl_plus"
 ```
 
-### Single Order
+The supported filters options are `common_name`, `product_type` and `status`.
+You can also use `--help` with any top level command to see what options are
+available for that specific parent command.
 
-Use `find` interface to retrieve a single order, this interface supports all
-default filters.
+#### Single Order
+
+To retrieve a single order we can use the `find` interface. It supports all the
+filters options and if there are more than one order then it will return the
+most recent one and print out the details in the console.
+
+This interface also support `--quiet` option, which we can used to retrieve the
+order id for any specific order. This might be useful to when we are doing it
+through some automated script.
 
 ```sh
 digicert order find -c "ribosetest.com" -p "ssl_plus" --status expired
 ```
 
-This interface also allow us to specific a flag in case we only want to find
-the `id` for the resource.
+#### Reissue an order
 
-```sh
-digicert order find -c "ribosetest.com" -p "ssl_plus" --status expired --quiet
-```
-
-### Reissue an order
-
-To reissue an existing order, we can use the following interface.
+Reissuing an order is pretty simple, if we have an `order_id` then we can
+reissue the certificate using the existing details. This interface also supports
+additional option to provide new csr and it will use it while reissuing the
+certificate. To reissue an order
 
 ```sh
 digicert order reissue --order_id 12345 --crt full_path_to.csr
 ```
 
-### Reissue and download a certificate
+#### Reissue & download
 
-To reissue an order and save that reissued certificate to a specific path we can
-use the following interface.
+Once an order is reissued then we can download it by providing `--output`
+option to the `reissue` interface. One important thing to note, Digicert
+requires sometime to reissue an certificate, so downloading process might take
+sometime as it tries to retrieve the reissued order in a specific time interval.
 
 ```sh
 digicert order reissue --order_id 123456 --output /full/download/path
@@ -62,25 +81,29 @@ digicert order reissue --order_id 123456 --output /full/download/path
 
 #### Fetch a certificate
 
-To fetch a certificate using the `order_id`, we can use the following interface,
-this interface also supports `--quite` option to fetch only the certificate id.
+The `fetch` interface on `certificate` will allow us to fetch the certificate
+for any specific order. By default this interface will print out the details to
+the console, but it also support one additional `--quiet` option to return only
+the id of the certificate.
 
 ```sh
-digicert certificate fetch --order_id 123456789 --quite
+digicert certificate fetch --order_id 123456789 --quiet
 ```
 
 #### Download a certificate
 
-To download a certificate we can use the following interface, this will download
-the certificates to the provided paths.
+To download a certificate we can use the same `fetch` interface but with the
+`--output` option. Based on the `--output` option `fetch` interface will fetch
+the certificates and download `root`, `intermedia` and `certificate` to the path
 
 ```sh
 digicert certificate fetch --order_id 123456 --output full_path_to_download
 ```
 
-There is another interface only to download the certificate, this interface
-support both the `--order_id` and `--certificate_id`, so if we need to download
-any certificate by it's id then we can use this one
+But it also has another dedicated `download` interface, which behave the same
+way but only downloads the content and it supports both the `--order_id` and
+`--certificate_id`, so if we only need to download any certificate by it's id
+then we can use this interface.
 
 ```ruby
 digicert certificate download --order_id 654321 --output /downloads
@@ -101,8 +124,8 @@ digicert certificate duplicates --order_id 123456
 
 #### Fetch an order's CSR
 
-If we need to retrieve the `CSR` for any specific order then we can use and it
-will return the content in the terminal.
+If we need to retrieve the `CSR` for any specific order then we can use the
+following interface and it will return the `CSR` content in the console.
 
 ```sh
 digicert csr fetch --order_id 123456
@@ -110,7 +133,9 @@ digicert csr fetch --order_id 123456
 
 #### Generate a new CSR
 
-To generate a new `CSR` using an existing order details we can use
+Digicert gem usages a third party library to generate a CSR, and we have also
+included that in the CLI to make the `CSR` generation process simpler, to
+generate a new `CSR` using an existing order details we can use
 
 ```sh
 digicert csr generate -o 12345 --key full_path_to_the.key
@@ -176,3 +201,5 @@ This gem is developed, maintained and funded by [Ribose Inc.][riboseinc]
 [issues]: https://github.com/abunashir/digicert-cli/issues
 [squash]: https://github.com/thoughtbot/guides/tree/master/protocol/git#write-a-feature
 [sandi-metz]: http://robots.thoughtbot.com/post/50655960596/sandi-metz-rules-for-developers
+[Digicert CLI]: https://github.com/riboseinc/digicert-cli
+[Digicert Ruby Client]: https://github.com/riboseinc/digicert
