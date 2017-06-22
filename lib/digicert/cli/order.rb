@@ -1,5 +1,4 @@
 require "digicert/cli/order_filterer"
-require "digicert/cli/order_reissuer"
 
 module Digicert
   module CLI
@@ -12,23 +11,6 @@ module Digicert
       def find
         filtered_orders = apply_filters(orders)
         apply_ouput_flag(filtered_orders.first)
-      end
-
-      def reissue
-        Digicert::CLI::OrderReissuer.new(
-          order_id: order_id, **options
-        ).create
-      end
-
-      def self.local_options
-        [
-          ["-q", "--quiet",  "Flag to return resource Id only"],
-          ["-s", "--status STATUS", "Use to specify the order status"],
-          ["-n", "--product_type NAME_ID", "The Digicert product name Id"],
-          ["-f", "--fetch", "Flag to fetch resource after certian operation"],
-          ["-r", "--crt CSR_FILE", "Full path for the csr file"],
-          ["-p", "--output DOWNLOAD_PATH", "Path to download the certificate"]
-        ]
       end
 
       private

@@ -15,14 +15,6 @@ module Digicert
         download_certificate(certificate_id)
       end
 
-      def self.local_options
-        [
-          ["-q", "--quiet",  "Flag to return only the certificate Id"],
-          ["-c", "--certificate_id CERTIFICATE_ID", "The certificate ID"],
-          ["-p", "--output DOWNLOAD_PATH", "Path to download the certificate"]
-        ]
-      end
-
       private
 
       attr_reader :output_path

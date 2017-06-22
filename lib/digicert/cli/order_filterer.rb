@@ -3,8 +3,7 @@ module Digicert
     class OrderFilterer
       attr_reader :orders
 
-      def initialize(orders:, filters:)
-        @orders = orders
+      def initialize(orders:, filters:) @orders = orders
         @status = filters.fetch(:status, nil)
         @common_name = filters.fetch(:common_name, nil)
         @product_type = filters.fetch(:product_type, nil)

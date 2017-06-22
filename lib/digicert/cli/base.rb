@@ -10,10 +10,6 @@ module Digicert
         extract_local_attributes(options)
       end
 
-      def self.local_options
-        []
-      end
-
       private
 
       def extract_local_attributes(options)

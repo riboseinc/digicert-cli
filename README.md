@@ -63,7 +63,7 @@ additional option to provide new csr and it will use it while reissuing the
 certificate. To reissue an order
 
 ```sh
-digicert order reissue --order_id 12345 --crt full_path_to.csr
+digicert order reissue 12345 --crt full_path_to.csr
 ```
 
 #### Reissue & download
@@ -74,7 +74,7 @@ requires sometime to reissue an certificate, so downloading process might take
 sometime as it tries to retrieve the reissued order in a specific time interval.
 
 ```sh
-digicert order reissue --order_id 123456 --output /full/download/path
+digicert order reissue 123456 --output /full/download/path
 ```
 
 ### Certificate
@@ -87,7 +87,7 @@ the console, but it also support one additional `--quiet` option to return only
 the id of the certificate.
 
 ```sh
-digicert certificate fetch --order_id 123456789 --quiet
+digicert certificate fetch 123456789 --quiet
 ```
 
 #### Download a certificate
@@ -97,7 +97,7 @@ To download a certificate we can use the same `fetch` interface but with the
 the certificates and download `root`, `intermedia` and `certificate` to the path
 
 ```sh
-digicert certificate fetch --order_id 123456 --output full_path_to_download
+digicert certificate fetch 123456 --output full_path_to_download
 ```
 
 But it also has another dedicated `download` interface, which behave the same
@@ -106,8 +106,8 @@ way but only downloads the content and it supports both the `--order_id` and
 then we can use this interface.
 
 ```ruby
-digicert certificate download --order_id 654321 --output /downloads
-digicert certificate download --certificate_id 123456 --output /downloads
+digicert certificate download --order-id 654321 --output /downloads
+digicert certificate download --certificate-id 123456 --output /downloads
 ```
 
 #### List duplicate certificates
@@ -117,7 +117,7 @@ use the following interface, and it will list the duplicate certificates with
 some important attributes.
 
 ```ruby
-digicert certificate duplicates --order_id 123456
+digicert certificate duplicates 123456
 ```
 
 ### CSR
@@ -128,7 +128,7 @@ If we need to retrieve the `CSR` for any specific order then we can use the
 following interface and it will return the `CSR` content in the console.
 
 ```sh
-digicert csr fetch --order_id 123456
+digicert csr fetch 123456
 ```
 
 #### Generate a new CSR
@@ -144,8 +144,8 @@ digicert csr generate -o 12345 --key full_path_to_the.key
 Generate `CSR` with `--common_name` and `san`
 
 ```sh
-digicert csr generate --common_name ribosetest.com --order_id 1234 \
-  --san test1.ribosetest.com,test2.ribosetest.com, --key path_to_key_file
+digicert csr generate --common_name ribosetest.com --order-id 1234 \
+  --san test1.ribosetest.com test2.ribosetest.com --key path_to_key_file
 ```
 
 ## Development

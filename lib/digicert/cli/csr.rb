@@ -13,14 +13,6 @@ module Digicert
         end
       end
 
-      def self.local_options
-        [
-          ["-k", "--key KEY_FILE_PATH", "Path to the rsa key file"],
-          ["-r", "--crt CSR_FILE", "Full path for the csr file"],
-          ["-n", "--san SAN", Array, "Subject Alternative Names"]
-        ]
-      end
-
       private
 
       attr_reader :rsa_key

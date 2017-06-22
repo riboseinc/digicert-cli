@@ -19,4 +19,4 @@ end
 require "bundler/setup"
 require "digicert/cli"
 
-Digicert::CLI.start(*ARGV)
+Digicert::CLI.start(ARGV)
