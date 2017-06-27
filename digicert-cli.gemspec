@@ -20,20 +20,10 @@ Gem::Specification.new do |spec|
   spec.bindir        = "bin"
   spec.executables   = "digicert"
 
-  # Digicert gem dpendenceis
-  #
-  # We are developing this cli and the digicert gem at the same time
-  # and we might not instantly push the digicert gems to rubygems while
-  # we are adding any new features. So let's use the one from our github
-  # and once we are close to finalize then we will switch to the actual
-  # digicert gem from rubygems.
-  #
-  # spec.add_dependency "digicert", "~> 0.1.1"
-  #
-
-  spec.add_dependency "terminal-table"
   spec.add_dependency "thor", "~> 0.19.4"
+  spec.add_dependency "digicert", "~> 0.1.2"
   spec.add_dependency "openssl", ">= 2.0.3"
+  spec.add_dependency "terminal-table"
 
   spec.add_development_dependency "bundler", "~> 1.14"
   spec.add_development_dependency "dotenv"
