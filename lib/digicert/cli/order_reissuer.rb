@@ -45,8 +45,9 @@ module Digicert
       end
 
       def print_request_details(request)
-        request_id = request.id
-        puts "Reissue request #{request_id} created for order - #{order_id}"
+        Digicert::CLI::Util.say(
+          "Reissue request #{request.id} created for order - #{order_id}",
+        )
       end
 
       def fetch_and_download_certificate(reissued_order_id)

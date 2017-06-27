@@ -12,8 +12,8 @@ module Digicert
         end
       end
 
-      def self.print_message(message)
-        puts(message)
+      def self.say(message, color = nil)
+        Thor::Shell::Basic.new.say(message, color)
       end
     end
   end

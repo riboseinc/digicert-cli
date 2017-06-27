@@ -25,7 +25,7 @@ module Digicert
       def fetch_order_in_interval
         number_of_times.to_i.times do |number|
           sleep wait_time.to_i
-          print_message("Fetch attempt #{number + 1}..")
+          say("Fetch attempt #{number + 1}..")
           order = Digicert::Order.fetch(order_id)
 
           if recently_reissued?(order.last_reissued_date)
@@ -40,8 +40,8 @@ module Digicert
         end
       end
 
-      def print_message(message)
-        Digicert::CLI::Util.print_message(message)
+      def say(message)
+        Digicert::CLI::Util.say(message)
       end
     end
   end

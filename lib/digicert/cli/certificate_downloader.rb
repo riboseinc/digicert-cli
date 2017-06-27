@@ -28,7 +28,7 @@ module Digicert
       end
 
       def write_certificate_contents(contents)
-        print_message("Downloaded certificate to:")
+        say("Downloaded certificate to:")
 
         write_to_path("root", contents[:root_certificate])
         write_to_path("certificate", contents[:certificate])
@@ -39,12 +39,12 @@ module Digicert
         certificate_name = [filename, key, "crt"].join(".")
         certificate_path = [path, certificate_name].join("/")
 
-        print_message(certificate_path)
+        say(certificate_path)
         File.open(certificate_path, "w") { |file| file.write(content) }
       end
 
-      def print_message(message)
-        Digicert::CLI::Util.print_message(message)
+      def say(message)
+        Digicert::CLI::Util.say(message)
       end
     end
   end
