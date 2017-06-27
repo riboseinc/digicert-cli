@@ -1,5 +1,8 @@
-require "dotenv/load"
+require "digicert"
+require "digicert/cli/rcfile"
 
-Digicert.configure do |config|
-  config.api_key = ENV["DIGICERT_API_KEY"]
+unless Digicert.configuration.api_key
+  Digicert.configure do |config|
+    config.api_key = Digicert::CLI::RCFile.api_key || ENV["DIGICERT_API_KEY"]
+  end
 end

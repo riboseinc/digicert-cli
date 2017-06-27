@@ -12,11 +12,12 @@ certificates and etc using [Digicert Ruby Client].
 
 ## Configure
 
-We need to setup our API key before we want to use the CLI. For simplicity it
-usages the environment variables. To configure the key we can use
+We need to setup our API key before we want to use the CLI. For simplicity we
+have add an easier interface to setup the Digicert API KEY. To setup your key
+please use the following interface.
 
 ```sh
-export DIGICERT_API_KEY=YOUR_SECRET_API_KEY
+digicert config DIGICERT_API_KEY
 ```
 
 ## Usages
