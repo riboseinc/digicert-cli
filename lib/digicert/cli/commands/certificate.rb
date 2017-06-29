@@ -12,8 +12,8 @@ module Digicert
           say(certificate_instance(order_id: order_id).fetch)
         end
 
-        desc "download", "Download a certificate"
-        option :order_id, aliases: "-o", desc: "Digicert order id"
+        desc "download [RSOURCE_OPTION]", "Download a certificate"
+        option :order_id, aliases: "-i", desc: "Digicert order ID"
         option :certificate_id, aliases: "-c", desc: "The certificate ID"
         option :output, aliases: "-o", desc: "Path to download the certificate"
 
