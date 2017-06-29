@@ -3,7 +3,7 @@ require "terminal-table"
 module Digicert
   module CLI
     module Util
-      def self.make_it_pretty(headings:, rows:, table_wdith: 80)
+      def self.make_it_pretty(headings:, rows:, table_wdith: 100)
         Terminal::Table.new do |table|
           table.headings = headings
           table.style = { width: table_wdith }
