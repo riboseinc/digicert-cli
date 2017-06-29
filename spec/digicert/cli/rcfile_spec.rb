@@ -13,6 +13,6 @@ RSpec.describe Digicert::CLI::RCFile do
   end
 
   def fixtures_path
-    File.expand_path("../../fixtures", __FILE__)
+    File.expand_path("../../../fixtures", __FILE__)
   end
 end
