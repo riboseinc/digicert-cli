@@ -1,5 +1,4 @@
 require "webmock/rspec"
-require "bundler/setup"
 require "digicert/cli"
 require "digicert/rspec"
 

@@ -35,10 +35,10 @@ for example if we want to list all the order for one specific product type
 `ssl_plus`, then we can do
 
 ```sh
-digicert order list --product_type "ssl_plus"
+digicert order list --product-type "ssl_plus"
 ```
 
-The supported filters options are `common_name`, `product_type` and `status`.
+The supported filters options are `common-name`, `product-type` and `status`.
 You can also use `--help` with any top level command to see what options are
 available for that specific parent command.
 
@@ -58,7 +58,7 @@ digicert order find -c "ribosetest.com" -p "ssl_plus" --status expired
 
 #### Reissue an order
 
-Reissuing an order is pretty simple, if we have an `order_id` then we can
+Reissuing an order is pretty simple, if we have an `order-id` then we can
 reissue the certificate using the existing details. This interface also supports
 additional option to provide new csr and it will use it while reissuing the
 certificate. To reissue an order
@@ -102,8 +102,8 @@ digicert certificate fetch 123456 --output full_path_to_download
 ```
 
 But it also has another dedicated `download` interface, which behave the same
-way but only downloads the content and it supports both the `--order_id` and
-`--certificate_id`, so if we only need to download any certificate by it's id
+way but only downloads the content and it supports both the `--order-id` and
+`--certificate-id`, so if we only need to download any certificate by it's id
 then we can use this interface.
 
 ```ruby
@@ -139,13 +139,13 @@ included that in the CLI to make the `CSR` generation process simpler, to
 generate a new `CSR` using an existing order details we can use
 
 ```sh
-digicert csr generate -o 12345 --key full_path_to_the.key
+digicert csr generate --oreder-id 12345 --key full_path_to_the.key
 ```
 
-Generate `CSR` with `--common_name` and `san`
+Generate `CSR` with `--common-name` and `san`
 
 ```sh
-digicert csr generate --common_name ribosetest.com --order-id 1234 \
+digicert csr generate --common-name ribosetest.com --order-id 1234 \
   --san test1.ribosetest.com test2.ribosetest.com --key path_to_key_file
 ```
 
@@ -161,7 +161,7 @@ should fix the violations as part of your contribution.
 Clone the repository.
 
 ```sh
-git clone https://github.com/abunashir/digicert-cli
+git clone https://github.com/riboseinc/digicert-cli
 ```
 
 Setup your environment.
@@ -199,7 +199,7 @@ Here are a few technical guidelines to follow:
 This gem is developed, maintained and funded by [Ribose Inc.][riboseinc]
 
 [riboseinc]: https://www.ribose.com
-[issues]: https://github.com/abunashir/digicert-cli/issues
+[issues]: https://github.com/riboseinc/digicert-cli/issues
 [squash]: https://github.com/thoughtbot/guides/tree/master/protocol/git#write-a-feature
 [sandi-metz]: http://robots.thoughtbot.com/post/50655960596/sandi-metz-rules-for-developers
 [Digicert CLI]: https://github.com/riboseinc/digicert-cli
