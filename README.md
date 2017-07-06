@@ -163,43 +163,52 @@ Downloaded certificate to:
 
 #### Fetch a certificate
 
-The `fetch` interface on `certificate` will allow us to fetch the certificate
-for any specific order. By default this interface will print out the details to
-the console, but it also support one additional `--quiet` option to return only
-the id of the certificate.
+The `fetch` interface will retrieve the certificate for any specific orders, by
+default it will print out the detail in the console but if we only want the `ID`
+then we can pass the `--quiet` flags with it.
 
 ```sh
-digicert certificate fetch 123456789 --quiet
+$ digicert certificate fetch 123456789 --quiet
 ```
 
 #### Download a certificate
 
 To download a certificate we can use the same `fetch` interface but with the
 `--output` option. Based on the `--output` option `fetch` interface will fetch
-the certificates and download `root`, `intermedia` and `certificate` to the path
+the certificates and download the `root`, `intermediate` and `certificate` to
+the output path, to download a certificate we can do
 
 ```sh
-digicert certificate fetch 123456 --output full_path_to_download
+$ digicert certificate fetch 123456 --output /path/to/downloads
 ```
 
-But it also has another dedicated `download` interface, which behave the same
-way but only downloads the content and it supports both the `--order-id` and
-`--certificate-id`, so if we only need to download any certificate by it's id
-then we can use this interface.
+The above interface supports downloading a certificate and it expects us to
+provide the `order-id`, but if we only care about download then we can also use
+the `download` interface. It acts pretty much similar but it let's us specify
+the `order-id` or `certificate-id`.
 
-```ruby
-digicert certificate download --order-id 654321 --output /downloads
-digicert certificate download --certificate-id 123456 --output /downloads
+```sh
+$ digicert certificate download --order-id 654321 --output /downloads
+$ digicert certificate download --certificate-id 123456 --output /downloads
 ```
 
 #### List duplicate certificates
 
-If we need to list the duplicate certificates for any specific order then we can
-use the following interface, and it will list the duplicate certificates with
-some important attributes.
+Digicert allows us to duplicate a certificate and if we want to list all of the
+duplicates then we can use the `duplicates` interface. This interface expects us
+to provide the `order-id` to list the duplicates
 
-```ruby
-digicert certificate duplicates 123456
+```sh
+$ digicert certificate duplicates 123456
+```
+
+```sh
++----------+-------------------+------------------+----------+--------------+
+| Id       | Common Name       | SAN Names        | Status   | Validity     |
++----------+-------------------+------------------+----------+--------------+
+| xxxxx19  | *.ribosetest.com  | *.ribosetest.com | approved | xxxxx-xxxxxx |
+|          |                   | ribosetest.com   |          |              |
++----------+-------------------+------------------+----------+--------------+
 ```
 
 ### CSR
