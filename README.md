@@ -35,10 +35,14 @@ for example if we want to list all the order for one specific product type
 `ssl_plus`, then we can do
 
 ```sh
-digicert order list --product-type "ssl_plus"
+digicert order list --filter 'status:pending,processing' \
+'common_name:ribosetest.com' 'valid_till:<2017-05-11'
 ```
 
-The supported filters options are `common-name`, `product-type` and `status`.
+The supported filters options are `date_created`, `valid_till`, `status`,
+`search`, `common_name` and `product_name_id`. Please [check the wiki] for more
+details on those
+
 You can also use `--help` with any top level command to see what options are
 available for that specific parent command.
 
@@ -53,7 +57,8 @@ order id for any specific order. This might be useful to when we are doing it
 through some automated script.
 
 ```sh
-digicert order find -c "ribosetest.com" -p "ssl_plus" --status expired
+digicert order find --filter 'common_name:ribosetest.com' \
+  'product_name_id:ssl_plus' 'status:pending,processing'
 ```
 
 #### Reissue an order
@@ -204,3 +209,4 @@ This gem is developed, maintained and funded by [Ribose Inc.][riboseinc]
 [sandi-metz]: http://robots.thoughtbot.com/post/50655960596/sandi-metz-rules-for-developers
 [Digicert CLI]: https://github.com/riboseinc/digicert-cli
 [Digicert Ruby Client]: https://github.com/riboseinc/digicert
+[check the wiki]: https://github.com/riboseinc/digicert-cli/wiki

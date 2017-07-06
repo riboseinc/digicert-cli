@@ -1,30 +1,30 @@
-require "digicert/cli/order_filterer"
+require "digicert/cli/filter_builder"
 
 module Digicert
   module CLI
     class Order < Digicert::CLI::Base
       def list
-        filtered_orders = apply_filters(orders)
-        display_orders_in_table(filtered_orders)
+        display_orders_in_table(orders)
       end
 
       def find
-        filtered_orders = apply_filters(orders)
-        apply_ouput_flag(filtered_orders.first)
+        apply_ouput_flag(orders.first)
       end
 
       private
 
       def orders
-        @orders ||= order_api.all
+        @orders ||= order_api.all(filter_options)
       end
 
       def order_api
         Digicert::Order
       end
 
-      def apply_filters(orders)
-        Digicert::CLI::OrderFilterer.filter(orders, options)
+      def filter_options
+        if options[:filter]
+          { filters: Digicert::CLI::FilterBuilder.build(options[:filter]) }
+        end
       end
 
       def apply_ouput_flag(order)

@@ -5,19 +5,15 @@ module Digicert
   module CLI
     module Commands
       class Order < Thor
-        class_option :common_name, aliases: "-c", desc: "The domain name"
-
         desc "list", "List digicert orders"
-        option :product_type, aliases: "-n", desc: "Digicert Name ID"
-        option :status, aliases: "-s", desc: "Specify the order status"
+        method_option :filter, type: :hash, desc: "Specify filter options"
 
         def list
           say(order_instance.list)
         end
 
         desc "find", "Find a digicert order"
-        option :product_type, aliases: "-n", desc: "Digicert Name ID"
-        option :status, aliases: "-s", desc: "Specify the order status"
+        method_option :filter, type: :hash, desc: "Specify filter options"
         option :quiet, type: :boolean, aliases: "-q", desc: "Retrieve only id"
 
         def find
