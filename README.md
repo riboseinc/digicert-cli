@@ -68,64 +68,95 @@ commands or subcommands and you should see what you need.
 
 ### Orders
 
+#### Listing Orders
+
 Listing orders is pretty simple with the CLI, once we have our API key
 configured then we can list all of our orders using the `list` interface
 
 ```sh
-digicert order list
+$ digicert order list
 ```
-
-This interface also support filtering orders based on some specific attributes,
-for example if we want to list all the order for one specific product type
-`ssl_plus`, then we can do
 
 ```sh
-digicert order list --filter 'status:pending,processing' \
-'common_name:ribosetest.com' 'valid_till:<2017-05-11'
++---------------+---------------+------------------+-------------+-------------+
+| Id            | Product Type  | Common Name      | Status      | Expiry      |
++---------------+---------------+------------------+-------------+-------------+
+| xxxxx65       | ssl_wildcard  | *.ribosetest.com | expired     | 2018-06-25  |
+| xxxxx20       | ssl_wildcard  | *.ribosetest.com | issued      | 2018-06-15  |
+| xxxxx06       | ssl_wildcard  | *.ribosetest.com | revoked     | 2018-05-09  |
++---------------+---------------+------------------+-------------+-------------+
 ```
 
-The supported filters options are `date_created`, `valid_till`, `status`,
-`search`, `common_name` and `product_name_id`. Please [check the wiki] for more
-details on those
+The above interface without any option will list out all of the orders we have
+with Digicert, but sometime we might need to filter those listings, and that's
+where can can use the filter options. This interface supports filter options
+through the `--filter` option and expect the value to be in `key:value` format.
 
-You can also use `--help` with any top level command to see what options are
-available for that specific parent command.
-
-#### Single Order
-
-To retrieve a single order we can use the `find` interface. It supports all the
-filters options and if there are more than one order then it will return the
-most recent one and print out the details in the console.
-
-This interface also support `--quiet` option, which we can used to retrieve the
-order id for any specific order. This might be useful to when we are doing it
-through some automated script.
+For example, if we want to retrieve all of the orders that has product type of
+`ssl_wildcard` then we can use
 
 ```sh
-digicert order find --filter 'common_name:ribosetest.com' \
-  'product_name_id:ssl_plus' 'status:pending,processing'
+$ digicert order list --filter 'product_name_id:ssl_wildcard'
 ```
+
+It will only list the orders with the `ssl_wildcard` product type, Currently the
+supported filters options are `date_created`, `valid_till`, `status`, `search`,
+`common_name` and `product_name_id`. Please [check the wiki] for more up to date
+supported filtering options.
+
+#### Find an order
+
+We can use the `find` interface to retrieve a single order, by default it will
+print the details in the console. This interface also supports filter options.
+
+One important thing to remember, it will only retrieve one single entry, so if
+you have multiple orders in your specified terms then it will only retrieve the
+most recent one form that list.
+
+```sh
+$ digicert order find --filter 'common_name:ribosetest.com' 'product_name_id:ssl_plus'
+```
+
+```sh
+#<Digicert::ResponseObject id=xxx04, certificate=#<Digicert::ResponseObject
+..........................id=xxxx08 price=xxxx, product_name_id="ssl_plus">
+```
+
+But if you don't care about that much of data and only need the `ID` then you
+can pass the `--quiet` flags to reduce the noises and retrieve only the id.
 
 #### Reissue an order
 
-Reissuing an order is pretty simple, if we have an `order-id` then we can
-reissue the certificate using the existing details. This interface also supports
-additional option to provide new csr and it will use it while reissuing the
-certificate. To reissue an order
+To reissue a non-expired order we can use the `reissue` interface and pass the
+order id to it. By default it will reissue the order using the existing details
+but if we want to update the `CSR` then we can pass the certificate file as
+`--crt`.
 
 ```sh
-digicert order reissue 12345 --crt full_path_to.csr
+$ digicert order reissue 12345 --crt path_to_the_new_csr.csr
 ```
 
-#### Reissue & download
+```sh
+Reissue request xxxxx8 created for order - 123456
+```
 
-Once an order is reissued then we can download it by providing `--output`
-option to the `reissue` interface. One important thing to note, Digicert
-requires sometime to reissue an certificate, so downloading process might take
-sometime as it tries to retrieve the reissued order in a specific time interval.
+Pretty cool right? The above interface also support some other option that we
+can use to download the recently reissued order. To download, all we need to do
+is just provide a valid path and it will automatically download the certificates
 
 ```sh
-digicert order reissue 123456 --output /full/download/path
+$ digicert order reissue 123456 --output /path/to/downloads
+```
+
+```sh
+Reissue request 1xxxxx created for order - 123456
+
+Fetch attempt 1..
+Downloaded certificate to:
+
+/path/to/downloads/123456.root.crt
+/path/to/downloads/123456.certificate.crt
+/path/to/downloads/123456.intermediate.crt
 ```
 
 ### Certificate
