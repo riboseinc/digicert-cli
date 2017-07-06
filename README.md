@@ -215,27 +215,31 @@ $ digicert certificate duplicates 123456
 
 #### Fetch an order's CSR
 
-If we need to retrieve the `CSR` for any specific order then we can use the
-following interface and it will return the `CSR` content in the console.
+Retrieving a `CSR` is pretty easy, if we have an order id and we want retrieve
+it's `CSR` then we can use the `fetch` interface from `csr` command. And once we
+passed it to the interface then it will retrieve and print it to the console.
 
 ```sh
-digicert csr fetch 123456
+$ digicert csr fetch 123456
 ```
 
 #### Generate a new CSR
 
 Digicert gem usages a third party library to generate a CSR, and we have also
-included that in the CLI to make the `CSR` generation process simpler, to
-generate a new `CSR` using an existing order details we can use
+included that in the CLI to make the `CSR` generation process simpler, so if we
+need to generate a new `CSR` then we can use the `generate` interface and pass
+the order id with the key file to generate the CSR
 
 ```sh
-digicert csr generate --oreder-id 12345 --key full_path_to_the.key
+$ digicert csr generate --oreder-id 12345 --key /path/to/the/key-file.key
 ```
 
-Generate `CSR` with `--common-name` and `san`
+This interface also support custom details like `common-name` and `san`. We can
+pass those as `--common-name` and `--san` and it will automatically use it to
+generate the new `CSR`
 
 ```sh
-digicert csr generate --common-name ribosetest.com --order-id 1234 \
+$ digicert csr generate --common-name ribosetest.com --order-id 1234 \
   --san test1.ribosetest.com test2.ribosetest.com --key path_to_key_file
 ```
 
