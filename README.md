@@ -22,9 +22,54 @@ digicert config DIGICERT_API_KEY
 
 ## Usages
 
+### Getting Help
+
+We have been trying to simplify the `CLI` with proper `help` documentation. Each
+of the `command` and `subcommand` should provide you the basic usages guide with
+the list of supported options.
+
+Normally the parent command should fire up the `help` documentation, but if it
+does not then you can explicitly call the `help` command or pass `-h` flags with
+any of the action and that should fire up the documentation. For example
+
+```sh
+$ digicert help
+```
+
+```sh
+Commands:
+  digicert certificate     # Manage Digicert Certificates
+  digicert config API_KEY  # Configure The CLI Client
+  digicert csr             # Fetch/generate Certificate CSR
+  digicert help [COMMAND]  # Describe available / One specific command
+  digicert order           # Manage Digicert Orders
+```
+
+The above command lists the available commands with a basic description and as
+you might have notice, it also ships with a `help` command which can be used to
+up the usages documentation for it's nested command.
+
+```sh
+# digicert order -h
+$ digicert help order
+```
+
+```sh
+Commands:
+  digicert order find              # Find a digicert order
+  digicert order help [COMMAND]    # Describe subcommands or one specific
+  digicert order list              # List digicert orders
+  digicert order reissue ORDER_ID  # Reissue digicert order
+```
+
+Hopefully you get the idea, we will try our best to keep this guide up to date
+but whenever you need some more information please add the `-h` flags with any
+commands or subcommands and you should see what you need.
+
 ### Orders
 
-Listing Digicert orders are pretty simple, we can list all of our orders using
+Listing orders is pretty simple with the CLI, once we have our API key
+configured then we can list all of our orders using the `list` interface
 
 ```sh
 digicert order list
