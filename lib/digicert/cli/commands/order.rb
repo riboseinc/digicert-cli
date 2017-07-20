@@ -21,7 +21,7 @@ module Digicert
         end
 
         desc "reissue ORDER_ID", "Reissue digicert order"
-        option :crt, desc: "The CSR content from a file"
+        option :csr, desc: "The CSR content from a file"
         option :output, aliases: "-o", desc: "Path to download certificates"
 
         def reissue(order_id)

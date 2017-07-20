@@ -128,10 +128,10 @@ Lots of information? Well, if you don't need that much details and only need the
 
 To reissue a non-expired order we can use the `order reissue` command and pass
 the order id. By default it will reissue the order using the existing details
-but we can update that by passing the certificate CSR as`--crt`
+but we can update that by passing the certificate CSR as`--csr`
 
 ```sh
-$ digicert order reissue 12345 --crt path_to_the_new_csr.csr
+$ digicert order reissue 12345 --csr path_to_the_new_csr.csr
 ```
 
 ```sh

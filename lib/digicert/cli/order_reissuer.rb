@@ -19,7 +19,7 @@ module Digicert
       attr_reader :csr_file, :output_path
 
       def extract_local_attributes(options)
-        @csr_file = options.fetch(:crt, nil)
+        @csr_file = options.fetch(:csr, nil)
         @output_path = options.fetch(:output, "/tmp")
       end
 

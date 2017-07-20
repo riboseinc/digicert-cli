@@ -5,12 +5,12 @@ RSpec.describe "Order reissuing" do
     context "reissue with new csr" do
       it "reissues an order with the provided csr" do
         mock_digicert_order_reissuer_create_message_chain
-        command = %w(order reissue 123456 --crt ./spec/fixtures/rsa4096.csr)
+        command = %w(order reissue 123456 --csr ./spec/fixtures/rsa4096.csr)
 
         Digicert::CLI.start(command)
 
         expect(Digicert::CLI::OrderReissuer).to have_received(:new).
-          with(order_id: "123456", crt: "./spec/fixtures/rsa4096.csr")
+          with(order_id: "123456", csr: "./spec/fixtures/rsa4096.csr")
       end
     end
 

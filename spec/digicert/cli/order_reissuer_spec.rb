@@ -22,7 +22,7 @@ RSpec.describe Digicert::CLI::OrderReissuer do
         allow(Digicert::OrderReissuer).to receive(:create)
 
         Digicert::CLI::OrderReissuer.new(
-          order_id: order_id, crt: csr_file,
+          order_id: order_id, csr: csr_file,
         ).create
 
         expect(Digicert::OrderReissuer).to have_received(:create).with(
