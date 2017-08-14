@@ -26,7 +26,7 @@ RSpec.describe Digicert::CLI::OrderReissuer do
         ).create
 
         expect(Digicert::OrderReissuer).to have_received(:create).with(
-          order_id: order_id, certificate: { csr: File.read(csr_file) },
+          order_id: order_id, csr: File.read(csr_file),
         )
       end
     end
@@ -62,13 +62,11 @@ RSpec.describe Digicert::CLI::OrderReissuer do
 
   def order_attributes(order)
     {
-      certificate: {
-        common_name: order.certificate.common_name,
-        dns_names: order.certificate.dns_names,
-        csr: order.certificate.csr,
-        signature_hash: order.certificate.signature_hash,
-        server_platform: { id: 45 },
-      },
+      common_name: order.certificate.common_name,
+      dns_names: order.certificate.dns_names,
+      csr: order.certificate.csr,
+      signature_hash: order.certificate.signature_hash,
+      server_platform: { id: 45 },
     }
   end
 end

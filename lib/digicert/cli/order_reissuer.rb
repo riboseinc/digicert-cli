@@ -32,7 +32,7 @@ module Digicert
           order_params[:order_id] = order_id
 
           if csr_file && File.exists?(csr_file)
-            order_params[:certificate] = { csr: File.read(csr_file) }
+            order_params[:csr] = File.read(csr_file)
           end
         end
       end
