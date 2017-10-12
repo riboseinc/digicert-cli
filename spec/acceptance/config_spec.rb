@@ -3,7 +3,7 @@ require "spec_helper"
 RSpec.describe "Config" do
   describe "configuring key" do
     it "stores the provided api key" do
-      command = %w(config DIGICERT_SECRET_KEY)
+      command = %w(config api-key DIGICERT_SECRET_KEY)
       allow(Digicert::CLI::RCFile).to receive(:set_key)
 
       Digicert::CLI.start(command)

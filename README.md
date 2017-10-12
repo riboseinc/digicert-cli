@@ -17,7 +17,7 @@ The `CLI` commands are heavily dependent on the Digicert API. Please
 your API key then you can configure it using the `config` command.
 
 ```sh
-$ digicert config DIGICERT_API_KEY
+$ digicert config api-key YOUR_API_KEY
 ```
 
 ## Usages
@@ -39,7 +39,7 @@ $ digicert help
 ```sh
 Commands:
   digicert certificate     # Manage Digicert Certificates
-  digicert config API_KEY  # Configure The CLI Client
+  digicert config          # Configure The CLI Client
   digicert csr             # Fetch/generate Certificate CSR
   digicert help [COMMAND]  # Describe available / One specific command
   digicert order           # Manage Digicert Orders
