@@ -18,7 +18,9 @@ module Digicert
         option :output, aliases: "-o", desc: "Path to download the certificate"
 
         def download
-          say(certificate_instance.download)
+          required_option_exists? || say(certificate_instance.download)
+        rescue Digicert::Errors::RequestError
+          say("Invalid Resource ID")
         end
 
         desc "duplicates ORDER_ID", "List duplicate certificates"
@@ -30,6 +32,12 @@ module Digicert
 
         def certificate_instance(id_attribute = {})
           Digicert::CLI::Certificate.new(options.merge(id_attribute))
+        end
+
+        def required_option_exists?
+          unless options[:order_id] || options[:certificate_id]
+            say("You must provide either `--order_id` or `--certificate_id`.")
+          end
         end
       end
     end
