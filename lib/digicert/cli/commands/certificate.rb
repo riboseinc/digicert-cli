@@ -15,7 +15,13 @@ module Digicert
         desc "download [RSOURCE_OPTION]", "Download a certificate"
         option :order_id, aliases: "-i", desc: "Digicert order ID"
         option :certificate_id, aliases: "-c", desc: "The certificate ID"
-        option :output, aliases: "-o", desc: "Path to download the certificate"
+
+        option(
+          :output,
+          aliases: "-o",
+          default: Dir.pwd,
+          desc: "Path to download the certificate",
+        )
 
         def download
           required_option_exists? || say(certificate_instance.download)
