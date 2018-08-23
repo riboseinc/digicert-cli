@@ -1,5 +1,5 @@
 #--
-# Copyright (c) 2017 Ribose Inc.
+# Copyright (c) 2018 Ribose Inc.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,6 @@
 
 module Digicert
   module CLI
-    VERSION = "0.4.1".freeze
+    VERSION = "0.4.2".freeze
   end
 end
