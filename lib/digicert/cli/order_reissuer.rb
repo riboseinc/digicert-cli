@@ -1,8 +1,3 @@
-require "date"
-
-require "digicert/cli/order_retriever"
-require "digicert/cli/certificate_downloader"
-
 module Digicert
   module CLI
     class OrderReissuer < Digicert::CLI::Base

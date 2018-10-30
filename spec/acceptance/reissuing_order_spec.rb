@@ -7,7 +7,7 @@ RSpec.describe "Order reissuing" do
         mock_digicert_order_reissuer_create_message_chain
         command = %w(order reissue 123456 --csr ./spec/fixtures/rsa4096.csr)
 
-        Digicert::CLI.start(command)
+        _output = capture_stdout { Digicert::CLI.start(command) }
 
         expect(Digicert::CLI::OrderReissuer).to have_received(:new).
           with(order_id: "123456", csr: "./spec/fixtures/rsa4096.csr")
@@ -19,7 +19,7 @@ RSpec.describe "Order reissuing" do
         mock_digicert_order_reissuer_create_message_chain
         command = %w(order reissue 123456 --output /tmp/downloads)
 
-        Digicert::CLI.start(command)
+        _output = capture_stdout { Digicert::CLI.start(command) }
 
         expect(Digicert::CLI::OrderReissuer).to have_received(:new).
           with(order_id: "123456", output: "/tmp/downloads")

@@ -6,7 +6,7 @@ RSpec.describe "Certificate" do
       command = %w(certificate fetch 123456 --quiet)
       allow(certificate_klass).to receive_message_chain(:new, :fetch)
 
-      Digicert::CLI.start(command)
+      _output = capture_stdout { Digicert::CLI.start(command) }
 
       expect(certificate_klass.new).to have_received(:fetch)
       expect(certificate_klass).to have_received(:new).with(
@@ -20,7 +20,7 @@ RSpec.describe "Certificate" do
       command = %w(certificate fetch 123456 --output /tmp/downloads)
       allow(Digicert::CLI::Certificate).to receive_message_chain(:new, :fetch)
 
-      Digicert::CLI.start(command)
+      _output = capture_stdout { Digicert::CLI.start(command) }
 
       expect(Digicert::CLI::Certificate).to have_received(:new).with(
         order_id: "123456", output: "/tmp/downloads"
@@ -36,7 +36,7 @@ RSpec.describe "Certificate" do
         Digicert::CLI::Certificate,
       ).to receive_message_chain(:new, :duplicates)
 
-      Digicert::CLI.start(command)
+      _output = capture_stdout { Digicert::CLI.start(command) }
 
       expect(
         Digicert::CLI::Certificate,
@@ -52,7 +52,7 @@ RSpec.describe "Certificate" do
         Digicert::CLI::Certificate,
       ).to receive_message_chain(:new, :download)
 
-      Digicert::CLI.start(command)
+      _output = capture_stdout { Digicert::CLI.start(command) }
 
       expect(
         Digicert::CLI::Certificate,
