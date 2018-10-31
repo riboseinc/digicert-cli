@@ -1,3 +1,4 @@
+require "digicert"
 require "terminal-table"
 
 module Digicert
@@ -12,6 +13,19 @@ module Digicert
 
       def self.say(message, color = nil)
         Thor::Shell::Basic.new.say(message, color)
+      end
+
+      def self.run(arguments)
+        if arguments.include?("--debug")
+          arguments.delete("--debug")
+
+          Digicert.configuration.debug_mode = true
+          Digicert::CLI::Command.start(arguments)
+          Digicert.configuration.debug_mode = true
+        else
+
+          Digicert::CLI::Command.start(arguments)
+        end
       end
     end
   end

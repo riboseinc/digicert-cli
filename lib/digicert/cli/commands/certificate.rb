@@ -4,6 +4,8 @@ module Digicert
   module CLI
     module Commands
       class Certificate < Thor
+        class_option :debug, type: "boolean", desc: "Enable debug mode"
+
         desc "fetch ORDER_ID", "Find an order's certificate"
         option :quiet, type: :boolean, aliases: "-q", desc: "Retrieve only id"
         option :output, aliases: "-o", desc: "Path to download the certificate"

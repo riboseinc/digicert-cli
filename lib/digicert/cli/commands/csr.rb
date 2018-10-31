@@ -4,8 +4,9 @@ module Digicert
   module CLI
     module Commands
       class Csr < Thor
-        desc "fetch ORDER_ID", "Fetch an existing CSR"
+        class_option :debug, type: "boolean", desc: "Enable debug mode"
 
+        desc "fetch ORDER_ID", "Fetch an existing CSR"
         def fetch(order_id)
           say(csr_instance(order_id: order_id).fetch)
         end

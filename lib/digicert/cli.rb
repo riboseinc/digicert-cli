@@ -32,7 +32,7 @@ require "digicert/cli/command"
 module Digicert
   module CLI
     def self.start(arguments)
-      Digicert::CLI::Command.start(arguments)
+      Digicert::CLI::Util.run(arguments)
     rescue Digicert::Errors::Forbidden, NoMethodError
       Thor::Shell::Basic.new.say(
         "Invalid: Missing API KEY\n\n" \

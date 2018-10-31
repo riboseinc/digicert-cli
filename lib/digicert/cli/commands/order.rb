@@ -7,6 +7,8 @@ module Digicert
   module CLI
     module Commands
       class Order < Thor
+        class_option :debug, type: "boolean", desc: "Enable debug mode"
+
         desc "list", "List digicert orders"
         method_option :filter, type: :hash, desc: "Specify filter options"
 
