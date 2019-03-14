@@ -12,10 +12,11 @@ module Digicert
         end
 
         desc "generate", "Generate certificate CSR"
+        option :order_id, aliases: "-o", desc: "An Order ID"
         option :common_name, aliases: "-c", desc: "The common name"
+        option :organization_id, desc: "Your digicert's organization ID"
         option :san, type: :array, desc: "The subject alternative names"
         option :key, aliases: "-k", desc: "Complete path to the rsa key file"
-        option :order_id, required: true, aliases: "-o", desc: "An Order ID"
 
         def generate
           say(csr_instance.generate)

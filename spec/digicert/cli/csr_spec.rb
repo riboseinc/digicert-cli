@@ -29,14 +29,17 @@ RSpec.describe Digicert::CLI::CSR do
 
     context "with custom details" do
       it "generates a new csr using the provided details" do
-        order_id = 123456
+        organization_id = 123456
         common_name = "ribosetest.com"
         key_file = "./spec/fixtures/rsa4096.key"
         san = ["site1.ribosetest.com", "site2.ribosetest.com"]
-        stub_digicert_order_fetch_api(order_id)
+        stub_digicert_organization_fetch_api(organization_id)
 
         csr = Digicert::CLI::CSR.new(
-          order_id: order_id, common_name: common_name, san: san, key: key_file,
+          san: san,
+          key: key_file,
+          common_name: common_name,
+          organization_id: organization_id,
         ).generate
 
         expect(csr.start_with?("-----BEGIN CERTIFICATE REQUEST")).to be_truthy

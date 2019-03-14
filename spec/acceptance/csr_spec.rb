@@ -23,13 +23,14 @@ RSpec.describe "CSR" do
         expect(Digicert::CLI::CSR).to have_received(:new).with(
           order_id: "123456", key: "./spec/fixtures/rsa4096.key",
         )
-      end end
+      end
+    end
 
     context "with provided details" do
       it "generates a new CSR with the details" do
         command = %w(
           csr generate
-          --order-id 123456
+          --organization_id 1234
           --common_name ribosetest.com
           --key ./spec/fixtures/rsa4096.key
           --san site1.ribosetest.com site2.ribosetest.com
@@ -39,7 +40,7 @@ RSpec.describe "CSR" do
         _output = capture_stdout { Digicert::CLI.start(command) }
 
         expect(Digicert::CLI::CSR).to have_received(:new).with(
-          order_id: "123456",
+          organization_id: "1234",
           common_name: "ribosetest.com",
           key: "./spec/fixtures/rsa4096.key",
           san: ["site1.ribosetest.com", "site2.ribosetest.com"],
