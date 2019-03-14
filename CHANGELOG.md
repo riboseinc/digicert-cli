@@ -1,3 +1,10 @@
+## 0.5.0 (2019-03-14)
+
+* Change CSR's Order Id to be optional
+* Add `--debug` flag with CLI commands
+* Add order duplication support in CLI
+* Add `order create` interface in the gem
+
 ## 0.4.1 (2018-07-18)
 
 * Upgrade `digicert` gem to latest version
