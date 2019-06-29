@@ -65,7 +65,6 @@ module Digicert
         end
 
         Digicert::CLI::Util.make_it_pretty(
-          table_wdith: 100,
           rows: certificates_attributes,
           headings: ["Id", "Common Name", "SAN Names", "Status", "Validity"],
         )
