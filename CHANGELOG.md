@@ -1,3 +1,8 @@
+## 0.5.1 (2019-06-29)
+
+* Fix invalid table width argument issue
+* Gracefully handle invalid API requests
+
 ## 0.5.0 (2019-03-14)
 
 * Change CSR's Order Id to be optional
