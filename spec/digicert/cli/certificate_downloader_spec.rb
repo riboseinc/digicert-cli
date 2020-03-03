@@ -1,5 +1,4 @@
 require "spec_helper"
-require "digicert/cli/certificate_downloader"
 
 RSpec.describe Digicert::CLI::CertificateDownloader do
   describe ".download" do

@@ -1,3 +1,5 @@
+require "digicert/cli/certificate_downloader"
+
 module Digicert
   module CLI
     class Certificate < Digicert::CLI::Base
