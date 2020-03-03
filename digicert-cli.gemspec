@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.executables   = "digicert"
 
   spec.add_dependency "thor", "~> 0.19.4"
-  spec.add_dependency "digicert", "~> 0.4.0"
+  spec.add_dependency "digicert", "~> 0.5.0"
   spec.add_dependency "openssl", ">= 2.0.3"
   spec.add_dependency "terminal-table"
 

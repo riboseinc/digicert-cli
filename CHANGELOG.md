@@ -1,3 +1,7 @@
+## 0.5.2 (2020-03-03)
+
+* Fix certificate download related issue
+
 ## 0.5.1 (2019-06-29)
 
 * Fix invalid table width argument issue
