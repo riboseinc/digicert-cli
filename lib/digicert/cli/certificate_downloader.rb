@@ -15,7 +15,7 @@ module Digicert
       end
 
       def self.download(attributes)
-        new(attributes).download
+        new(**attributes).download
       end
 
       private

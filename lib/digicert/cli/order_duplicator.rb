@@ -15,7 +15,7 @@ module Digicert
       end
 
       def duplicate_an_order
-        Digicert::OrderDuplicator.create(order_params)
+        Digicert::OrderDuplicator.create(**order_params)
       end
 
       def order_params

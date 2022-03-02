@@ -19,7 +19,7 @@ module Digicert
       end
 
       def reissue_an_order
-        Digicert::OrderReissuer.create(order_params)
+        Digicert::OrderReissuer.create(**order_params)
       end
 
       def order_params
