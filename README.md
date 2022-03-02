@@ -1,7 +1,6 @@
 # Digicert CLI
 
-[![Build
-Status](https://travis-ci.org/riboseinc/digicert-cli.svg?branch=master)](https://travis-ci.org/riboseinc/digicert-cli)
+[![Build Status](https://github.com/riboseinc/digicert-cli/actions/workflows/test.yml/badge.svg)](https://github.com/riboseinc/digicert-cli/actions/workflows/test.yml)
 [![Code
 Climate](https://codeclimate.com/github/riboseinc/digicert-cli/badges/gpa.svg)](https://codeclimate.com/github/riboseinc/digicert-cli)
 [![Gem
